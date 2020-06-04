@@ -1,0 +1,11 @@
+run:
+  - exec:
+      cmd:
+        - apt-get update && apt-get install -y clamav
+        - freshclam
+  - file:
+     path: /etc/service/clamav/run
+     chmod: "+x"
+     contents: |
+        #!/bin/sh
+        exec thpoff chpst /usr/bin/clamscan $1
